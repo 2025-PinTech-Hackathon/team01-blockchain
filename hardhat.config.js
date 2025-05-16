@@ -6,7 +6,7 @@ module.exports = {
   solidity: "0.8.20",
   networks: {
     amoy: {
-      url: process.env.AMOY_RPC_URL || "https://polygon-amoy.drpc.org",
+      url: "https://rpc-amoy.polygon.technology",
       accounts: process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [],
       chainId: 80002
     },

@@ -4,43 +4,56 @@ require('dotenv').config();
 async function main() {
     // 환경 변수
     const {
-        LOCAL_RPC_URL,
-        EIPCHAIN_LOCAL,
-        HARDHAT1_PRIVATE,
-        HARDHAT2_WALLET,
+        AMOY_RPC_URL,
+        EIPCHAIN,
+        DEPLOYER_PRIVATE_KEY,
+        RECEIVER,
     } = process.env;
 
-    if (!LOCAL_RPC_URL) throw new Error('LOCAL_RPC_URL이 설정되지 않았습니다.');
-    if (!EIPCHAIN_LOCAL) throw new Error('EIPCHAIN_LOCAL이 설정되지 않았습니다.');
-    if (!HARDHAT1_PRIVATE) throw new Error('HARDHAT1_PRIVATE가 설정되지 않았습니다.');
-    if (!HARDHAT2_WALLET) throw new Error('HARDHAT2_WALLET이 설정되지 않았습니다.');
+    if (!AMOY_RPC_URL) throw new Error('AMOY_RPC_URL이 설정되지 않았습니다.');
+    if (!EIPCHAIN) throw new Error('EIPCHAIN이 설정되지 않았습니다.');
+    if (!DEPLOYER_PRIVATE_KEY) throw new Error('DEPLOYER_PRIVATE_KEY가 설정되지 않았습니다.');
+    if (!RECEIVER) throw new Error('RECEIVER가 설정되지 않았습니다.');
 
 
     // 프로바이더 및 지갑
-    const provider = new ethers.providers.JsonRpcProvider(LOCAL_RPC_URL);
-    const deployer = new ethers.Wallet(HARDHAT1_PRIVATE, provider);
+    const provider = new ethers.providers.JsonRpcProvider("https://rpc-amoy.polygon.technology");
+    const deployer = new ethers.Wallet(DEPLOYER_PRIVATE_KEY, provider);
 
     // 테스트용 user 지갑 생성
-    const user = HARDHAT2_WALLET;
+    const user = RECEIVER;
     // console.log('User:', user.address);
 
     // 컨트랙트 인스턴스
-    const EIP712Example = require('../artifacts/contracts/EIP712Example.sol/EIP712Example.json');
-    const contract = new ethers.Contract(EIPCHAIN_LOCAL, EIP712Example.abi, deployer);
+    const Pintech = require('../artifacts/contracts/Pintech.sol/Pintech.json');
+    const contract = new ethers.Contract(EIPCHAIN, Pintech.abi, deployer);
 
     // 테스트용 uuid 및 tokenId
     const uuid = 'test-uuid-12345';
+    const agentName = 'test-agent-name';
 
     // 1. NFT 발행
     console.log('\nNFT 발행...');
+    const gasPrice = await provider.getGasPrice();
     const mintTx = await contract.mintWithAgentInfo(
         user,
-        uuid
+        uuid,
+        agentName,
+        {
+            gasPrice: gasPrice.mul(2), // 가스비 2배로 설정
+            gasLimit: 5000000, // 가스 한도 설정
+        }
     );
     console.log('트랜잭션 해시:', mintTx.hash);
 
-    await mintTx.wait();
-    console.log('NFT 발행 완료!');
+    console.log('트랜잭션 처리 대기 중...');
+    try {
+        await mintTx.wait(1); // 1개의 블록 확인
+        console.log('NFT 발행 완료!');
+    } catch (error) {
+        console.error('트랜잭션 처리 중 오류:', error);
+        throw error;
+    }
 
     // 2. uuid로 NFT 존재 여부 확인
     const exists = await contract.verifyUser(uuid);
