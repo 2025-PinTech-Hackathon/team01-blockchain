@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 
 // 컨트랙트 ABI와 주소
-const Pintech = require('../contracts/Pintech.sol/Pintech.json');
+import Pintech from '../contracts/Pintech.sol/Pintech.json' with { type: 'json' };
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
 
 export default async (event) => {
@@ -19,7 +19,7 @@ export default async (event) => {
     }
 
     // 프로바이더 설정
-    const provider = 'https://rpc-amoy.polygon.technology';
+    const provider = new ethers.JsonRpcProvider('https://rpc-amoy.polygon.technology')
     const deployer = new ethers.Wallet(process.env.DEPLOYER_PRIVATE_KEY, provider);
     const contract = new ethers.Contract(CONTRACT_ADDRESS, Pintech.abi, deployer);
 

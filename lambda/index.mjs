@@ -8,7 +8,7 @@ export const handler = async (event) => {
   const { httpMethod, path } = event;
   console.log("EVENT:", JSON.stringify(event));
 
-  if (path.startsWith('/register') && httpMethod === 'GET') {
+  if (path.startsWith('/register') && httpMethod === 'POST') {
     return await register(event);
   } else if (path.startsWith('/verify') && httpMethod === 'GET') {
     return await verify(event);

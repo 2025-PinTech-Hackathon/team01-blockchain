@@ -29,8 +29,8 @@ async function main() {
     const contract = new ethers.Contract(EIPCHAIN, Pintech.abi, deployer);
 
     // 테스트용 uuid 및 tokenId
-    const uuid = 'test-uuid-12345';
-    const agentName = 'test-agent-name';
+    const uuid = 'test-uuid-123456';
+    const agentName = '홍길동';
 
     // 1. NFT 발행
     console.log('\nNFT 발행...');
