@@ -1,0 +1,31 @@
+{
+  "name": "team01-blockchain",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2025-PinTech-Hackathon/team01-blockchain.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/2025-PinTech-Hackathon/team01-blockchain/issues"
+  },
+  "homepage": "https://github.com/2025-PinTech-Hackathon/team01-blockchain#readme",
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@nomiclabs/hardhat-etherscan": "^3.1.7",
+    "@openzeppelin/contracts": "^4.9.3",
+    "ethers": "^5.8.0",
+    "hardhat": "^2.24.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  }
+}
