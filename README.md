@@ -42,6 +42,10 @@
 
 동일한 3개의 엔트포인트를 /dev 스테이지에서 배포합니다.
 
+![image](https://github.com/user-attachments/assets/a4a24865-8333-420a-becc-39f7f2a28b94)
+![image](https://github.com/user-attachments/assets/d1c1d350-b0f0-403c-8fa3-995989799431)
+
+
 Lambda 메인 handler에서는 분기처리를 통해 각 요청에 맞는 동작을 수행합니다.
 
 ```
@@ -70,3 +74,13 @@ export const handler = async (event) => {
 }
 ```
 
+
+### 지갑 생성 GET 요청
+![image](https://github.com/user-attachments/assets/1ebf8e23-984b-459e-9cde-23e572e39ab0)
+
+
+### NFT 발급
+
+
+
+### NFT 검증
