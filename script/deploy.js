@@ -3,7 +3,7 @@ const hre = require("hardhat");
 async function main() {
   const gasPrice = await hre.ethers.provider.getGasPrice();
 
-  console.log("EIP712Example 컨트랙트 배포 시작...");
+  console.log("Pintech 컨트랙트 배포 시작...");
 
   console.log('컨트랙트 팩토리 생성...');
   const Pintech = await hre.ethers.getContractFactory("Pintech");
