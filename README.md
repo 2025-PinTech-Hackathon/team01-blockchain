@@ -79,8 +79,22 @@ export const handler = async (event) => {
 ![image](https://github.com/user-attachments/assets/1ebf8e23-984b-459e-9cde-23e572e39ab0)
 
 
-### NFT 발급
+### NFT 발급 POST 요청
+```
+{
+  "userAddress" : "0xFdCEcEc5818E31E3e8f03Ab3FAc5EA7e6e380287",
+  "uuid": "test-uuid",
+  "agentName": "홍길동"
+}
+```
+![image](https://github.com/user-attachments/assets/da021d23-62a0-49b5-88a8-c65ad11f917c)
 
 
+### NFT 검증 GET 요청
 
-### NFT 검증
+```
+uuid=test-uuid-123456
+```
+![image](https://github.com/user-attachments/assets/0876638d-e215-485e-ac76-fdf712e39591)
+
+
