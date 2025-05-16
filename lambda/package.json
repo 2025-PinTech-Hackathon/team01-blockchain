@@ -1,0 +1,8 @@
+{
+  "name": "pintech-lambda",
+  "version": "1.0.0",
+  "description": "Pintech NFT Lambda Functions",
+  "dependencies": {
+    "ethers": "^5.8.0"
+  }
+} 
